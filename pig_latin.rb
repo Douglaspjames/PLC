@@ -1,12 +1,20 @@
 def convert_word_to_pig_latin(word)
-  if word.downcase.start_with?('a','e','i','o','u')
+  vowels = ["a", "e", "i", "o", "u"]
+  if vowels.include?(word[0])
     word
   else
-    word = word.split(//)
-      
-    word << word.shift
-    word.join + "AY"
+    consonant = word.slice!(/\A[^aeiou]+/)
+    word << consonant + 'ay'\
   end
 end
 
-convert_word_to_pig_latin("SHIT")
+convert_word_to_pig_latin("scream")
+
+
+def convert_to_pig_latin(sentence)
+  words = sentence.split(' ')
+  words.each do |word|
+    convert_word_to_pig_latin(word)
+  end
+  words.join(' ')
+end
